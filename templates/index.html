@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editable DataFrame</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 6px;
+        }
+        input[type="text"] {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Editable DataFrame (Only columnB is editable)</h2>
+    <form method="POST">
+        <table>
+            <thead>
+                <tr>
+                    {% for col in df.columns %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(df.shape[0]) %}
+                <tr>
+                    {% for j in range(df.shape[1]) %}
+                        <td>
+                            {% if df.columns[j] == 'columnB' %}
+                                <input type="text" name="columnB_{{ i }}" value="{{ df.iloc[i, j] }}">
+                            {% else %}
+                                {{ df.iloc[i, j] }}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <input type="submit" value="Save Changes">
+    </form>
+</body>
+</html>
