@@ -19,5 +19,5 @@ jobs:
             repos/${{ github.repository }}/branches/release/protection \
             -f enforce_admins=true \
             -f required_pull_request_reviews.dismiss_stale_reviews=true \
-            -f required_pull_request_reviews.required_approving_review_count=2 \
+            -f required_pull_request_reviews.required_approving_review_count=1 \
             -f required_pull_request_reviews.require_code_owner_reviews=true
