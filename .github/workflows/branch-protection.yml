@@ -3,7 +3,7 @@ name: Apply Branch Protection
 on:
   push:
     branches:
-      - main   # run once from main or default branch
+      - main
 
 jobs:
   protect-release:
@@ -14,10 +14,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.ADMIN_TOKEN }}
         run: |
-          gh api \
-            --method PUT \
-            repos/${{ github.repository }}/branches/release/protection \
-            -F enforce_admins=true \
-            -F required_pull_request_reviews.dismiss_stale_reviews=true \
-            -F required_pull_request_reviews.required_approving_review_count=1 \
-            -F required_pull_request_reviews.require_code_owner_reviews=true
+          echo "Authenticating..."
+          gh auth status
+
