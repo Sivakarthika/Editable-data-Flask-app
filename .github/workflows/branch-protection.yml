@@ -1,0 +1,23 @@
+name: Apply Branch Protection
+
+on:
+  push:
+    branches:
+      - main   # run once from main or default branch
+
+jobs:
+  protect-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Apply branch protection
+        env:
+          GH_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+        run: |
+          gh api \
+            --method PUT \
+            repos/${{ github.repository }}/branches/release/protection \
+            -f enforce_admins=true \
+            -f required_pull_request_reviews.dismiss_stale_reviews=true \
+            -f required_pull_request_reviews.required_approving_review_count=2 \
+            -f required_pull_request_reviews.require_code_owner_reviews=true
