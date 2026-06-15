@@ -14,20 +14,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.ADMIN_TOKEN }}
         run: |
-          gh auth status
-
-          gh api --method PUT \
-            repos/${{ github.repository }}/branches/release/protection \
-            -H "Accept: application/vnd.github+json" \
-            --input - <<'EOF'
-          {
-            "required_status_checks": null,
-            "enforce_admins": true,
-            "required_pull_request_reviews": {
-              "dismiss_stale_reviews": true,
-              "require_code_owner_reviews": true,
-              "required_approving_review_count": 1
-            },
-            "restrictions": null
-          }
-          EOF
+          gh api --method PUT repos/${{ github.repository }}/branches/release/protection \
+          -H "Accept: application/vnd.github+json" \
+          -f enforce_admins=true \
+          -f required_pull_request_reviews.dismiss_stale_reviews=true \
+          -f required_pull_request_reviews.require_code_owner_reviews=true \
+          -f required_pull_request_reviews.required_approving_review_count=1
