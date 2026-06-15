@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 # Sample dynamic DataFrame with more columns
 df = pd.DataFrame({
-    'columnA': ['row1', 'row2', 'row3'],
+    'columnA': ['row11', 'row2', 'row3'],
     'columnB': ['edit1', 'edit2', 'edit3'],
     'columnC': ['val1', 'val2', 'val3'],
     'columnD': ['val4', 'val5', 'val6'],
